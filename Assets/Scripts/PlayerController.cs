@@ -9,8 +9,8 @@ public class PlayerController : MonoBehaviour
     private GameManager gameManager;
     private Rigidbody rb;
 
-    private float HP_Max;
-    private float HP_Now;
+    public float HP_Max;
+    public float HP_Now;
 
     private Vector2 moveInput;
     private float playerSpeed;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
             playerAttack();
             playerDashCooldown();
         }
+        playerHPControl();
 
 
         // Temporary Functions
@@ -68,6 +69,7 @@ public class PlayerController : MonoBehaviour
             GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
         else GetComponent<MeshRenderer>().material.color = Color.white;
+        if (Input.GetKeyDown(KeyCode.O)) HP_Now = HP_Max;
     }
 
     
@@ -176,5 +178,11 @@ public class PlayerController : MonoBehaviour
         }
         isDashing = false;
         yield return null;
+    }
+
+    private void playerHPControl()
+    {
+        if (HP_Now < 0) HP_Now = 0;
+        if (HP_Max == 0) HP_Max = 1;
     }
 }
