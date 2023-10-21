@@ -20,8 +20,9 @@ public class PlayerController : MonoBehaviour
     private float attackTimer;
 
     private bool isDashing;
-    private bool dashable;
+    public bool dashable;
     private float dashDistance;
+    private float dashSpeed;
     private float dashCooldown;
     private float dashTimer;
     private void Awake()
@@ -41,7 +42,8 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         dashable = true;
         dashDistance = 2f;
-        dashCooldown = 3f;
+        dashSpeed = 50f;
+        dashCooldown = 0.1f;
         dashTimer = 0f;
     }
 
@@ -58,7 +60,6 @@ public class PlayerController : MonoBehaviour
         {
             playerMove();
             playerAttack();
-            playerDashCooldown();
         }
         playerHPControl();
 
@@ -78,13 +79,16 @@ public class PlayerController : MonoBehaviour
     {
         if (gameManager.status == GameManager.gameStatus.Running)
         {
-            if (ctx.performed)
+            if (!isDashing)
             {
-                moveInput = ctx.ReadValue<Vector2>();
-            }
-            else if(ctx.canceled)
-            {
-                moveInput = Vector2.zero;
+                if (ctx.performed)
+                {
+                    moveInput = ctx.ReadValue<Vector2>().normalized;
+                }
+                else if (ctx.canceled)
+                {
+                    moveInput = Vector2.zero;
+                }
             }
         }
     }
@@ -110,11 +114,9 @@ public class PlayerController : MonoBehaviour
         {
             if (ctx.performed)
             {
-                if (dashable)
+                if (dashable && moveInput != Vector2.zero)
                 {
-                    StartCoroutine(playerDash());
-                    isDashing = true;
-                    dashTimer = dashCooldown;
+                    StartCoroutine(playerDash(moveInput));
                 }
             }
         }
@@ -128,7 +130,7 @@ public class PlayerController : MonoBehaviour
 
             if (moveInput != Vector2.zero)
             {
-                transform.rotation = new Quaternion(moveInput.x, 0f, moveInput.y, 0f);
+                transform.localRotation = Quaternion.Euler(0f, Vector2.SignedAngle(Vector2.up, new Vector2(moveInput.x * -1, moveInput.y)), 0f);
             }
         }
     }
@@ -150,9 +152,9 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void playerDashCooldown()
+    private IEnumerator playerDashCooldown()
     {
-        if (dashTimer > 0)
+        while (dashTimer > 0)
         {
             dashTimer -= Time.deltaTime;
             if (dashTimer <= 0f)
@@ -160,22 +162,23 @@ public class PlayerController : MonoBehaviour
                 dashTimer = 0f;
                 dashable = true;
             }
+            yield return null;
         }
     }
 
-    private IEnumerator playerDash()
+    private IEnumerator playerDash(Vector2 towards)
     {
+        isDashing = true;
         dashable = false;
         dashTimer = dashCooldown;
-        float counter = dashDistance;
-        while (counter > 0)
+        StartCoroutine(playerDashCooldown());
+        Vector3 tempVec3 = transform.position;
+        while ((tempVec3 - transform.position).magnitude < dashDistance)
         {
-            Vector3 tempVec3 = transform.position;
-            transform.Translate(transform.forward);
-            float deltaDistance = (tempVec3 - transform.position).magnitude;
-            counter -= deltaDistance;
+            rb.velocity = new Vector3(towards.x, 0f, towards.y) * dashSpeed;
             yield return null;
         }
+        rb.velocity = Vector3.zero;
         isDashing = false;
         yield return null;
     }
