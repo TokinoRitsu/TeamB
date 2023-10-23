@@ -114,7 +114,7 @@ namespace Microsoft.Unity.VisualStudio.Editor
 
 		private static int DebuggingPort()
 		{
-			return 56000 + (System.Diagnostics.Process.GetCurrentProcess().Id % 1000);
+			return 56500 + (System.Diagnostics.Process.GetCurrentProcess().Id % 1000);
 		}
 
 		private static int MessagingPort()
