@@ -6,14 +6,16 @@ using UnityEngine;
 public class Room : ScriptableObject
 {
     public int bonusCost;
+    public int bonusTier;
     public int enemyCost;
-    public int wave;
     public int enemyTier;
-    public Room(int _bonusCost, int _enemyCost, int _wave, int _enemyTier)
+    public int wave;
+    public Room(int _bonusCost, int _bonusTier, int _enemyCost, int _enemyTier, int _wave)
     {
         bonusCost = _bonusCost;
+        bonusTier = _bonusTier;
         enemyCost = _enemyCost;
-        wave = _wave;
         enemyTier = _enemyTier;
+        wave = _wave;
     }
 }

@@ -629,7 +629,7 @@ GameObject:
   - component: {fileID: 776551987}
   - component: {fileID: 776551986}
   m_Layer: 0
-  m_Name: RoomGenerator
+  m_Name: RoomInitializer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,6 +652,10 @@ MonoBehaviour:
   - {fileID: 8151610560408182718, guid: 8dd70e0fa9749c44da51a57a18cf3d6a, type: 3}
   - {fileID: 8151610560408182718, guid: dbf71ed1616301a4a8c569c7aa894c53, type: 3}
   - {fileID: 8151610560408182718, guid: a563a226e71cfe14eaba627f66df7c73, type: 3}
+  randomPosXmin: 0
+  randomPosXmax: 0
+  randomPosZmin: 0
+  randomPosZmax: 0
 --- !u!4 &776551987
 Transform:
   m_ObjectHideFlags: 0
