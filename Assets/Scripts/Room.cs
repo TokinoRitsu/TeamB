@@ -2,20 +2,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu]
-public class Room : ScriptableObject
+public class Room
 {
-    public int bonusCost;
-    public int bonusTier;
-    public int enemyCost;
+    public int roomID;
+
+    public int buffCapacity;
+    public int buffTier;
+    public bool[] buffTaken;
+
+    public int debuffCapacity;
+    public int debuffTier;
+    
+    public int hpRewardCapacity;
+
+    public int enemyCapacity;
     public int enemyTier;
-    public int wave;
-    public Room(int _bonusCost, int _bonusTier, int _enemyCost, int _enemyTier, int _wave)
+
+    public bool cleared;
+
+    public Room(int _roomID, int _buffCapacity, int _buffTier, int _debuffCapacity, int _debuffTier, int _hpRewardCapacity, int _enemyCapacity, int _enemyTier)
     {
-        bonusCost = _bonusCost;
-        bonusTier = _bonusTier;
-        enemyCost = _enemyCost;
+        roomID = _roomID;
+        buffCapacity = _buffCapacity;
+        buffTier = _buffTier;
+        debuffCapacity = _debuffCapacity;
+        debuffTier = _debuffTier;
+        hpRewardCapacity = _hpRewardCapacity;
+        enemyCapacity = _enemyCapacity;
         enemyTier = _enemyTier;
-        wave = _wave;
+        cleared = false;
     }
 }

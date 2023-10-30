@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
         dashable = true;
         dashDistance = 2f;
         dashSpeed = 50f;
-        dashCooldown = 0.1f;
+        dashCooldown = 2f;
         dashTimer = 0f;
     }
 
