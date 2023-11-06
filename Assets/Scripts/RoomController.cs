@@ -54,21 +54,24 @@ public class RoomController : MonoBehaviour
                     if (i == 1) name = "Doll";
                     else if (i == 2) name = "Skeleton";
                     else if (i == 3) name = "Bomb";
-
                     enemiesToBeGenerated.Add(new Enemy(name, tier, i));
                     cost -= i;
                 }
             }
         }
-        
+
         // Generate HP Reward
-        if (room.hpRewardCapacity > 0)
+        int enemyHPSum = 0;
+        foreach (Enemy enemy in enemiesToBeGenerated) enemyHPSum += enemy.enemyHP_Max;
+        int hpRewardCapacity = enemyHPSum / 2000 + 1;
+
+        if (hpRewardCapacity > 0)
         {
             int rewardCounter = 0;
             List<int> intList = new List<int>();
             for (int i = 0; i < enemiesToBeGenerated.Count; i++) intList.Add(i);
             List<int> indexHolder = new List<int>();
-            while (rewardCounter < room.hpRewardCapacity)
+            while (rewardCounter < hpRewardCapacity)
             {
                 int randomIndex = intList[UnityEngine.Random.Range(0, intList.Count)];
                 intList.Remove(randomIndex);

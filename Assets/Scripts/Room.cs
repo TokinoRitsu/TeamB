@@ -6,30 +6,36 @@ public class Room
 {
     public int roomID;
 
+    public int shape;
+
     public int buffCapacity;
     public int buffTier;
-    public bool[] buffTaken;
+    public int[] buffs;
 
-    public int debuffCapacity;
-    public int debuffTier;
-    
-    public int hpRewardCapacity;
+    public int trapCapacity;
+    public int[] traps;
 
     public int enemyCapacity;
     public int enemyTier;
 
+    public bool isDoubleDamage;
+    public bool isTripleDamage;
+
+    public int wave;
     public bool cleared;
 
-    public Room(int _roomID, int _buffCapacity, int _buffTier, int _debuffCapacity, int _debuffTier, int _hpRewardCapacity, int _enemyCapacity, int _enemyTier)
+    public Room(int _roomID, int _shape, int _buffCapacity, int _buffTier, int _trapCapacity, int _enemyCapacity, int _enemyTier, bool _isDoubleDamage, bool _isTripleDamage, int _wave)
     {
         roomID = _roomID;
+        shape = _shape;
         buffCapacity = _buffCapacity;
         buffTier = _buffTier;
-        debuffCapacity = _debuffCapacity;
-        debuffTier = _debuffTier;
-        hpRewardCapacity = _hpRewardCapacity;
+        trapCapacity = _trapCapacity;
         enemyCapacity = _enemyCapacity;
         enemyTier = _enemyTier;
+        isDoubleDamage = _isDoubleDamage;
+        isTripleDamage = _isTripleDamage;
+        wave = _wave;
         cleared = false;
     }
 }
