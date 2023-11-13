@@ -67,9 +67,9 @@ public class PlayerController : MonoBehaviour
         // Temporary Functions
         if (isAttacking)
         {
-            GetComponent<MeshRenderer>().material.color = Color.yellow;
+            // GetComponent<MeshRenderer>().material.color = Color.yellow;
         }
-        else GetComponent<MeshRenderer>().material.color = Color.white;
+        else // GetComponent<MeshRenderer>().material.color = Color.white;
         if (Input.GetKeyDown(KeyCode.O)) HP_Now = HP_Max;
     }
 
