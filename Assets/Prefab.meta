@@ -1,0 +1,32 @@
+fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+guid: 8d45437109e1cff40ab74dd668cf4950
+=======
+guid: 8621cf90690c4ab4fb6277c4f39cb442
+>>>>>>> master
+=======
+guid: 30961ac80c4366443ba97441b5bcc10a
+>>>>>>> Stashed changes
+=======
+<<<<<<<< Updated upstream:Assets/EnemyGeneration.meta
+<<<<<<< Updated upstream
+<<<<<<< HEAD
+guid: 2a768c1190bb88143ab4b837b21c88ee
+=======
+guid: 8aa786621f45e584089ca4a6eabe2a7c
+>>>>>>> master
+=======
+guid: 79f687131ee2c744f9a47e284cd73810
+>>>>>>> Stashed changes
+========
+guid: 0ce7e4d091ffc65479fd03909455531e
+>>>>>>>> Stashed changes:Assets/Prefab.meta
+>>>>>>> Stashed changes
+folderAsset: yes
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

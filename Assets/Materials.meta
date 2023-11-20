@@ -1,5 +1,9 @@
 fileFormatVersion: 2
-guid: 25c2c16a586d66947ad449d37b2446d8
+<<<<<<<< Updated upstream:Assets/Materials.meta
+guid: 3da501c105defa54b802034fc56e74f2
+========
+guid: d4c0fd624432fcf4a802ec7adc69dc59
+>>>>>>>> Stashed changes:Assets/Material.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

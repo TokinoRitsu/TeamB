@@ -25,6 +25,9 @@ public class PlayerController : MonoBehaviour
     private float dashSpeed;
     private float dashCooldown;
     private float dashTimer;
+
+    Animator player_animator;
+
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
@@ -33,7 +36,7 @@ public class PlayerController : MonoBehaviour
         HP_Max = 100f;
         HP_Now = HP_Max;
 
-        playerSpeed = 10.0f;
+        playerSpeed = 5.0f;
 
         isAttacking = false;
         attackCooldown = 0.5f;
@@ -43,17 +46,15 @@ public class PlayerController : MonoBehaviour
         dashable = true;
         dashDistance = 2f;
         dashSpeed = 50f;
-        dashCooldown = 2f;
+        dashCooldown = 0.1f;
         dashTimer = 0f;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        
+        player_animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if (gameManager.status == GameManager.gameStatus.Running)
@@ -65,11 +66,6 @@ public class PlayerController : MonoBehaviour
 
 
         // Temporary Functions
-        if (isAttacking)
-        {
-            // GetComponent<MeshRenderer>().material.color = Color.yellow;
-        }
-        else // GetComponent<MeshRenderer>().material.color = Color.white;
         if (Input.GetKeyDown(KeyCode.O)) HP_Now = HP_Max;
     }
 
@@ -83,10 +79,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (ctx.performed)
                 {
+                    player_animator.SetBool("walk", true);
                     moveInput = ctx.ReadValue<Vector2>().normalized;
                 }
                 else if (ctx.canceled)
                 {
+                    player_animator.SetBool("walk", false);
                     moveInput = Vector2.zero;
                 }
             }

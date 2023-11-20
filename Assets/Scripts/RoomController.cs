@@ -50,20 +50,16 @@ public class RoomController : MonoBehaviour
             {
                 if (cost - i >= 0)
                 {
-                    string name = "";
-                    if (i == 1) name = "Doll";
-                    else if (i == 2) name = "Skeleton";
-                    else if (i == 3) name = "Bomb";
-                    enemiesToBeGenerated.Add(new Enemy(name, tier, i));
+                    enemiesToBeGenerated.Add(new Enemy(tier, i));
                     cost -= i;
                 }
             }
         }
 
         // Generate HP Reward
-        int enemyHPSum = 0;
+        float enemyHPSum = 0;
         foreach (Enemy enemy in enemiesToBeGenerated) enemyHPSum += enemy.enemyHP_Max;
-        int hpRewardCapacity = enemyHPSum / 2000 + 1;
+        float hpRewardCapacity = enemyHPSum / 2000 + 1;
 
         if (hpRewardCapacity > 0)
         {
@@ -92,6 +88,6 @@ public class RoomController : MonoBehaviour
         float randomPosX = UnityEngine.Random.Range(randomPosXmin, randomPosXmax);
         float randomPosZ = UnityEngine.Random.Range(randomPosZmin, randomPosZmax);
         enemyObject.transform.position = new Vector3(randomPosX, enemyObject.transform.position.y, randomPosZ);
-        enemyObject.GetComponent<EnemyController>().enemy = enemy;
+        enemyObject.GetComponent<EnemyController>().e = enemy;
     }
 }
