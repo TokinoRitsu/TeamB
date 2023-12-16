@@ -51,26 +51,11 @@ ndOOO OOOO
         GenerateRoom(room.roomShape);
     }
 
-    /*
-     *  pjjjjjjj h
-        pcOOO OOOO 
-        lOOOO OOOOk
-        lOOOO OOOOk
-        lOOOO OOOOk
-        XOOOO OOOOE
-        lOOOO OOOOk
-        lOOOO OOOOk
-        lOOOO OOOOk
-        ndOOO OOOO 
-         niiiiiii g
-    */
-
     public void GenerateRoom(string _roomShape)
     {
         Vector3 pos = new Vector3(0, 0, 0);
         foreach (char i in _roomShape)
         {
-            Debug.Log(i.ToString());
             if (i == '\n')
             {
                 pos = new Vector3(0, pos.y, pos.z - 1);
@@ -105,4 +90,6 @@ ndOOO OOOO
         }
         return result;
     }
+
+
 }
