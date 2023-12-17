@@ -57,13 +57,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\Bonus\BonusTrigger.cs" />
+    <Compile Include="Assets\Scripts\BuffTime.cs" />
     <Compile Include="Assets\Scripts\Camera\ChaseCamera.cs" />
+    <Compile Include="Assets\Scripts\Enemy\Bomb.cs" />
     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyTrigger.cs" />
+    <Compile Include="Assets\Scripts\Enemy\ExplosionTrigger.cs" />
     <Compile Include="Assets\Scripts\Enemy\OnhitTrigger.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\HPBarController.cs" />
+    <Compile Include="Assets\Scripts\HelperClass\MathParabola.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Room\Room.cs" />
     <Compile Include="Assets\Scripts\Room\RoomGenerator.cs" />

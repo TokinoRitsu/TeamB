@@ -14,6 +14,6 @@ public class ChaseCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameObject.transform.position = new Vector3(player_object.transform.position.x, transform.position.y, transform.position.z);
+        gameObject.transform.position = new Vector3(player_object.transform.position.x - 3f, transform.position.y, player_object.transform.position.z + 3);
     }
 }

@@ -6,11 +6,9 @@ using UnityEngine.AI;
 public class EnemyController : MonoBehaviour
 {
     //Keep hand componenet in 2nd position to make scrip works
-    [SerializeField] int tier; //Set the enemy tier;
-    [SerializeField] int cost;
 
     NavMeshAgent agent;
-    public Vector3 player_pos;
+    public Transform player_pos;
     bool onBaCD; //Basic attack cooldown
     public bool hit; //True if this attack hit already
     float cd_counter; //Counter for cooldown
@@ -21,7 +19,11 @@ public class EnemyController : MonoBehaviour
     public GameObject bonus;
     public bool chasingTarget; //Is the enemy chasing a target?
 
-    private Material material;
+    public bool busy; //check if whether enemy is going to grab bonus
+
+    //Bomb
+    public GameObject bomb_gameobject;
+    public Transform bomb_startPos;
 
     public enum EnemyStates
     {
@@ -32,11 +34,10 @@ public class EnemyController : MonoBehaviour
         Dead,
     }
 
-    public EnemyStates currentState;
+    EnemyStates currentState;
 
     private void Awake()
     {
-        e = new Enemy(tier, cost); //New enemy
         cd_counter = 0;
         onBaCD = false;
     }
@@ -46,24 +47,14 @@ public class EnemyController : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = transform.GetChild(1).GetComponent<Animator>(); //Get Animator componenet from hand
         currentState = EnemyStates.Idle;
-        player_pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+        player_pos = GameObject.FindGameObjectWithTag("Player").transform;
 
         chasingTarget = false;
-
-
-        material = GetComponent<MeshRenderer>().material;
-        if (e.isBoss) material.color = new Color(1, 0, 0);
-        else if (e.hasHpReward) material.color = new Color(0, 1, 0);
-        else material.color = new Color(1, 1, 1);
-
-        Debug.Log(e.enemyTier);
     }
 
     void Update()
     {
-
-        player_pos = GameObject.FindGameObjectWithTag("Player").transform.position;
-        //Debug.Log(Vector3.Distance(player_pos.position, transform.position));
+        Debug.Log(chasingTarget);
         //Basic attack cooldown counting on any state
         if (onBaCD)
         {
@@ -82,11 +73,11 @@ public class EnemyController : MonoBehaviour
                 break;
             case EnemyStates.Chasing:
                 chasingTarget = true;
-                agent.destination = player_pos; //Chase player
+                agent.destination = player_pos.position; //Chase palyer
                 
 
                 //If player in attack range, switch to attack state
-                if (Vector3.Distance(player_pos, transform.position) <= e.attack_range)
+                if (Vector3.Distance(player_pos.position, transform.position) <= e.attack_range)
                 {
                     
                     currentState = EnemyStates.Attack;
@@ -95,7 +86,20 @@ public class EnemyController : MonoBehaviour
                 break;
 
             case EnemyStates.Bonus:
-                agent.destination = bonus.transform.position;
+                if (bonus != null)
+                {
+                    agent.destination = bonus.transform.position;
+                } else
+                {
+                    if (chasingTarget)
+                    {
+                        currentState = EnemyStates.Chasing;
+                    } else
+                    {
+                        currentState = EnemyStates.Idle;
+                    }
+                }
+                
                 if (chasingTarget)
                 {
 
@@ -107,26 +111,35 @@ public class EnemyController : MonoBehaviour
             case EnemyStates.Attack:
 
                 //If player still in range and not on basic attack cooldown, attack
-                if (Vector3.Distance(player_pos, transform.position) <= e.attack_range && !onBaCD)
+                if (Vector3.Distance(player_pos.position, transform.position) <= e.attack_range && !onBaCD)
                 {
-                    if (e.GetTier() == 1 && e.GetEnemyCost() == 1)
+                    if (e.GetTier() == 1)
                     {
                         agent.isStopped = true; //Stop the agent if in attack range;
                         Attack(e.GetAttack());
                     }
 
-                    if (e.GetTier() == 1 && e.GetEnemyCost() == 2)
+                    if (e.GetTier() == 2)
                     {
                         Debug.Log("Doing");
-                        agent.destination = player_pos;
+                        agent.destination = player_pos.position;
                         SpinAttack(500, 5);
+                    }
+
+                    if (e.GetTier() == 3)
+                    {
+                        
+                        ThrowBomb(e.GetAttack());
                     }
                     
      
-                } else if (Vector3.Distance(player_pos, transform.position) <= e.attack_range && onBaCD)
+                } else if (Vector3.Distance(player_pos.position, transform.position) <= e.attack_range && onBaCD)
                 {
                     if (animator != null)
+                    {
                         animator.SetBool("attack", false);
+                    }
+                    
                     //wait for next attack
                 } else
                 {
@@ -163,5 +176,12 @@ public class EnemyController : MonoBehaviour
     {
         transform.Rotate(0, speed * Time.deltaTime, 0);
         
+    }
+
+    public void ThrowBomb(float damage)
+    {
+        transform.LookAt(player_pos);
+        GameObject b = Instantiate(bomb_gameobject, bomb_startPos.position, Quaternion.identity);
+        onBaCD = true;
     }
 }

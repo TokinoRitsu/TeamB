@@ -31,11 +31,11 @@ public class PlayerController : MonoBehaviour
     private void Awake()
     {
         gameManager = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
-        rb = GetComponent<Rigidbody>();
 
         HP_Max = 100f;
         HP_Now = HP_Max;
 
+        moveInput = Vector2.zero;
         playerSpeed = 5.0f;
 
         isAttacking = false;
@@ -52,11 +52,13 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         player_animator = GetComponent<Animator>();
     }
 
     void Update()
     {
+        // Debug.Log(moveInput);
         if (gameManager.status == GameManager.gameStatus.Running)
         {
             playerMove();
@@ -79,12 +81,12 @@ public class PlayerController : MonoBehaviour
             {
                 if (ctx.performed)
                 {
-                    player_animator.SetBool("walk", true);
+                    // player_animator.SetBool("walk", true);
                     moveInput = ctx.ReadValue<Vector2>().normalized;
                 }
                 else if (ctx.canceled)
                 {
-                    player_animator.SetBool("walk", false);
+                    // player_animator.SetBool("walk", false);
                     moveInput = Vector2.zero;
                 }
             }
@@ -124,8 +126,8 @@ public class PlayerController : MonoBehaviour
     {
         if (!isDashing)
         {
+            // Debug.Log(moveInput.ToString() + " " + playerSpeed.ToString());
             rb.velocity = new Vector3(moveInput.x, 0f, moveInput.y) * playerSpeed;
-
             if (moveInput != Vector2.zero)
             {
                 transform.localRotation = Quaternion.Euler(0f, Vector2.SignedAngle(Vector2.up, new Vector2(moveInput.x * -1, moveInput.y)), 0f);
@@ -170,6 +172,7 @@ public class PlayerController : MonoBehaviour
         dashable = false;
         dashTimer = dashCooldown;
         StartCoroutine(playerDashCooldown());
+        rb.useGravity = false;
         Vector3 tempVec3 = transform.position;
         while ((tempVec3 - transform.position).magnitude < dashDistance)
         {
@@ -178,6 +181,7 @@ public class PlayerController : MonoBehaviour
         }
         rb.velocity = Vector3.zero;
         isDashing = false;
+        rb.useGravity = true;
         yield return null;
     }
 

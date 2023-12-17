@@ -5,7 +5,8 @@ using UnityEngine;
 public class EnemyTrigger : MonoBehaviour
 {
     EnemyController ec;
-    List<GameObject> bonus; 
+    List<GameObject> bonus;
+    
 
     private void Start()
     {
@@ -17,11 +18,12 @@ public class EnemyTrigger : MonoBehaviour
         Debug.Log(other.gameObject.name);
         if (other.CompareTag("Bonus"))
         {
+            ec.busy = true;
             ec.setCurrentEnemyState(EnemyController.EnemyStates.Bonus);
             ec.bonus = other.gameObject;
         }
 
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !ec.busy)
         {
             ec.setCurrentEnemyState(EnemyController.EnemyStates.Chasing);
         }

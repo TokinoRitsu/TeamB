@@ -8,6 +8,7 @@ public class BonusTrigger : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
+            other.GetComponent<EnemyController>().busy = false;
             if (other.gameObject.GetComponent<EnemyController>().chasingTarget)
             {
                 other.gameObject.GetComponent<EnemyController>().setCurrentEnemyState(EnemyController.EnemyStates.Chasing);

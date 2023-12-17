@@ -39,6 +39,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1724503535965977698}
     m_Modifications:
+    - target: {fileID: 1198781716919178304, guid: 7a8b4ef056f8ecd4d894dad24879684d,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8308086353057775614, guid: 7a8b4ef056f8ecd4d894dad24879684d,
         type: 3}
       propertyPath: m_Name
@@ -108,6 +113,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5847430295159102028}
     m_Modifications:
+    - target: {fileID: 2535485976066313317, guid: b312d095b65734d4b99f562e8e317ddc,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4827827509113772476, guid: b312d095b65734d4b99f562e8e317ddc,
         type: 3}
       propertyPath: m_RootOrder
@@ -242,6 +252,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LaserTowerHead
+      objectReference: {fileID: 0}
+    - target: {fileID: 4404956835677215571, guid: 0a63138ad747ae14b99ebc88f65129bd,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0a63138ad747ae14b99ebc88f65129bd, type: 3}

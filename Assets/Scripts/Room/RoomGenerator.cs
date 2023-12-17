@@ -9,6 +9,7 @@ public class RoomGenerator : MonoBehaviour
     public Room room = new Room();
     
     public GameObject[] RoomTilePrefabs;
+    public GameObject[] MobPrefabs;
 
     private Dictionary<char, string> CharToName = new Dictionary<char, string>
     {
@@ -48,7 +49,11 @@ lOOOO OOOOk
 lOOOO OOOOk
 ndOOO OOOO 
  niiiiiii g";
+        room.spawnPoints.Add(new List<Room.SpawnPoint>());
+        room.spawnPoints[0].Add(new Room.SpawnPoint(7, -7, 0));
+        room.spawnPoints[0].Add(new Room.SpawnPoint(3, -7, 0, true));
         GenerateRoom(room.roomShape);
+        GenerateMobs(room.spawnPoints[0]);
     }
 
     public void GenerateRoom(string _roomShape)
@@ -65,6 +70,15 @@ ndOOO OOOO
                 GenerateTile(i, pos);
                 pos = new Vector3(pos.x + 1, pos.y, pos.z);
             }
+        }
+    }
+
+    public void GenerateMobs(List<Room.SpawnPoint> _spawnPoints)
+    {
+        foreach(Room.SpawnPoint i in _spawnPoints)
+        {
+            GameObject mobObject = Instantiate(MobPrefabs[i.index]);
+            mobObject.transform.position = i.pos;
         }
     }
 
