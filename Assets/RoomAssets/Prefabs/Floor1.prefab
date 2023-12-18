@@ -45,12 +45,12 @@ GameObject:
   - component: {fileID: 3018290386594428551}
   - component: {fileID: 5777169867023721791}
   - component: {fileID: 9037695859045892499}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FLOOR_Type1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 8
   m_IsActive: 1
 --- !u!4 &1268665398363162609
 Transform:
@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Center: {x: 0, y: 2, z: 0}
   m_LayerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 256
   m_UseGeometry: 0
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
@@ -169,6 +169,6 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.15666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
