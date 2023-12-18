@@ -10,15 +10,23 @@ public class HPBarController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        updateHPBar();
+        if (player == null)
+        {
+            player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        }
+        else
+        {
+            updateHPBar();
 
-        if (Input.GetKey(KeyCode.P)) player.HP_Now--;
+            if (Input.GetKey(KeyCode.P)) player.HP_Now--;
+        }
+        
     }
 
     private void updateHPBar()

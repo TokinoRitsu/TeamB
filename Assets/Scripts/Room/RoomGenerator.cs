@@ -2,14 +2,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.AI;
 
 
 public class RoomGenerator : MonoBehaviour
 {
     public Room room = new Room();
-    
+
+    public GameObject PlayerPrefab;
     public GameObject[] RoomTilePrefabs;
     public GameObject[] MobPrefabs;
+
+    GameObject[] walkable;
+    List<NavMeshSurface> navMeshSurfaces = new List<NavMeshSurface>();
 
     private Dictionary<char, string> CharToName = new Dictionary<char, string>
     {
@@ -54,11 +59,27 @@ ndOOO OOOO
         room.spawnPoints[0].Add(new Room.SpawnPoint(3, -7, 0, true));
         GenerateRoom(room.roomShape);
         GenerateMobs(room.spawnPoints[0]);
+        //NavMesh
+        walkable = GameObject.FindGameObjectsWithTag("Walkable");
+        for (int i = 0; i < walkable.Length; i++)
+        {
+            navMeshSurfaces.Add(walkable[i].transform.GetChild(0).GetComponent<NavMeshSurface>());
+        }
+        foreach (NavMeshSurface nef in navMeshSurfaces)
+        {
+            nef.BuildNavMesh();
+        }
+        GeneratePlayer();
+
+        
+
     }
 
     public void GenerateRoom(string _roomShape)
     {
         Vector3 pos = new Vector3(0, 0, 0);
+        GameObject parentObject = new GameObject();
+        parentObject.name = "RoomObject";
         foreach (char i in _roomShape)
         {
             if (i == '\n')
@@ -67,7 +88,7 @@ ndOOO OOOO
             }
             else
             {
-                GenerateTile(i, pos);
+                GenerateTile(i, pos, parentObject.transform);
                 pos = new Vector3(pos.x + 1, pos.y, pos.z);
             }
         }
@@ -82,13 +103,21 @@ ndOOO OOOO
         }
     }
 
-    public void GenerateTile(char tile, Vector3 pos)
+    public void GenerateTile(char tile, Vector3 pos, Transform parent)
     {
         if (tile != ' ' && tile != System.Environment.NewLine.ToCharArray()[0])
         {
             GameObject TileObject = Instantiate(GetGameObject(CharToName[tile]));
             TileObject.transform.position = pos;
+            TileObject.transform.SetParent(parent);
         }
+    }
+
+    public void GeneratePlayer()
+    {
+        GameObject EntranceObject = GameObject.FindGameObjectWithTag("Entrance");
+        GameObject PlayerObject = Instantiate(PlayerPrefab);
+        PlayerObject.transform.position = EntranceObject.transform.position;
     }
 
     public GameObject GetGameObject(string _name)

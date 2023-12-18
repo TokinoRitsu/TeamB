@@ -1,15 +1,20 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
-    - BonusTrigger
     - ChaseCamera
+    - Enemy
     - EnemyController
     - EnemyTrigger
     - GameManager
     - HPBarController
-    - OnhitTrigger
     - PlayerController
+    - RoomGenerator
+    NavMeshComponents.dll:
+    - UnityEngine.AI.NavMeshSurface
+    NavMeshComponentsEditor.dll:
+    - UnityEditor.AI.NavMeshAssetManager
     Unity.InputSystem.dll:
+    - UnityEngine.InputSystem.Editor.PlayerInputEditor
     - UnityEngine.InputSystem.InputActionAsset
     - UnityEngine.InputSystem.InputSettings
     - UnityEngine.InputSystem.InputSystemObject
@@ -20,23 +25,19 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
     UnityEngine.UI.dll:
-    - UnityEngine.EventSystems.EventSystem
-    - UnityEngine.EventSystems.StandaloneInputModule
     - UnityEngine.UI.CanvasScaler
     - UnityEngine.UI.GraphicRaycaster
     - UnityEngine.UI.Image
   sceneClasses:
-    Assets/Scenes/Enemy_Test.unity:
+    Assets/Scenes/Samples.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -57,7 +58,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 54
       Script: {instanceID: 0}
-    - Class: 65
+    - Class: 64
       Script: {instanceID: 0}
     - Class: 74
       Script: {instanceID: 0}
@@ -74,35 +75,33 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11348}
+      Script: {instanceID: 11346}
     - Class: 114
-      Script: {instanceID: 11686}
+      Script: {instanceID: 11428}
     - Class: 114
-      Script: {instanceID: 11924}
+      Script: {instanceID: 11694}
     - Class: 114
-      Script: {instanceID: 12322}
+      Script: {instanceID: 11932}
     - Class: 114
-      Script: {instanceID: 12464}
+      Script: {instanceID: 12240}
     - Class: 114
-      Script: {instanceID: 12604}
+      Script: {instanceID: 12482}
     - Class: 114
-      Script: {instanceID: 13300}
+      Script: {instanceID: 12624}
     - Class: 114
-      Script: {instanceID: 13880}
+      Script: {instanceID: 13326}
     - Class: 114
-      Script: {instanceID: 14474}
+      Script: {instanceID: 13858}
     - Class: 114
-      Script: {instanceID: 14490}
+      Script: {instanceID: 13912}
     - Class: 114
-      Script: {instanceID: 15300}
+      Script: {instanceID: 14008}
     - Class: 114
-      Script: {instanceID: 15304}
+      Script: {instanceID: 14072}
     - Class: 114
-      Script: {instanceID: 15306}
+      Script: {instanceID: 14078}
     - Class: 114
-      Script: {instanceID: 15308}
-    - Class: 114
-      Script: {instanceID: 15310}
+      Script: {instanceID: 14532}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 135
@@ -124,8 +123,6 @@ ScriptsOnlyBuild:
     - Class: 223
       Script: {instanceID: 0}
     - Class: 224
-      Script: {instanceID: 0}
-    - Class: 238
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -158,6 +155,24 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_Dropdown
+  - hash:
+      serializedVersion: 2
+      Hash: 5f52ab618bf8c600638943374003e134
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomGenerator
+  - hash:
+      serializedVersion: 2
+      Hash: 2b19be13f00df62e6d4d4f5539bcad51
+    assemblyName: NavMeshComponents.dll
+    namespaceName: UnityEngine.AI
+    className: NavMeshModifier
+  - hash:
+      serializedVersion: 2
+      Hash: c8c672fee8a258266e51b55a210b8083
+    assemblyName: NavMeshComponents.dll
+    namespaceName: UnityEngine.AI
+    className: NavMeshLink
   - hash:
       serializedVersion: 2
       Hash: e7a73f5f78ba6445195ec23b74a1ce2d
@@ -292,6 +307,12 @@ ScriptsOnlyBuild:
     className: GameManager
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ExplosionTrigger
+  - hash:
+      serializedVersion: 2
       Hash: bd3cf68c8964d3c66d1c43f4f98508c9
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -346,16 +367,16 @@ ScriptsOnlyBuild:
     className: Shadow
   - hash:
       serializedVersion: 2
+      Hash: 2d4c3e499389b1d75d9aa4bd1fe21de2
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyController
+  - hash:
+      serializedVersion: 2
       Hash: 75d82cdc8c4eb5f12570aa378266875e
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem.UI
     className: InputSystemUIInputModule
-  - hash:
-      serializedVersion: 2
-      Hash: fdd53b2f269f99c782365446607cb2af
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: RoomController
   - hash:
       serializedVersion: 2
       Hash: cc4274b586df3c02688bac01b88bd16c
@@ -404,6 +425,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem
     className: InputSettings
+  - hash:
+      serializedVersion: 2
+      Hash: 7299a528424874bcf6b5736b5305ac37
+    assemblyName: NavMeshComponents.dll
+    namespaceName: UnityEngine.AI
+    className: NavMeshModifierVolume
   - hash:
       serializedVersion: 2
       Hash: cd0ecdca0166232906c6f2df9dddc3d3
@@ -520,6 +547,12 @@ ScriptsOnlyBuild:
     className: VerticalLayoutGroup
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: OnhitTrigger
+  - hash:
+      serializedVersion: 2
       Hash: d79be48f820686024dd0d9e080d7733b
     assemblyName: Unity.InputSystem.dll
     namespaceName: UnityEngine.InputSystem
@@ -598,6 +631,12 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
+      Hash: 8d4458b476a9a4dd8df843a849fcfffa
+    assemblyName: NavMeshComponents.dll
+    namespaceName: UnityEngine.AI
+    className: NavMeshSurface
+  - hash:
+      serializedVersion: 2
       Hash: f336e086360abe49a3323e5f1583c35a
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -614,6 +653,30 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.TestRunner.dll
     namespaceName: UnityEngine.TestTools
     className: BeforeAfterTestCommandState
+  - hash:
+      serializedVersion: 2
+      Hash: f8ca3685b79942fbc33020726add98c4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Bomb
+  - hash:
+      serializedVersion: 2
+      Hash: cef331e7d9db73db0358716e5f9fa576
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Enemy
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ChaseCamera
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyTrigger
   - hash:
       serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
@@ -658,6 +721,12 @@ ScriptsOnlyBuild:
     className: BaseInput
   - hash:
       serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BonusTrigger
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -668,6 +737,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.EventSystems
     className: EventTrigger
+  - hash:
+      serializedVersion: 2
+      Hash: eddf052a01dc6801b61db8736ced5362
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: BuffTime
   - hash:
       serializedVersion: 2
       Hash: 5dea360fb0b147724ac344e6f399c2f3
@@ -746,37 +821,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: 9f2f9957b7ac5918c8faec1885122340
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: EnemyController
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: OnhitTrigger
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: ChaseCamera
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: EnemyTrigger
-  - hash:
-      serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: BonusTrigger
   platform: 19
   scenePathNames:
-  - Assets/Scenes/Enemy_Test.unity
-  playerPath: C:/Users/student/Desktop/TeamB_1120/TeamB_1018.exe
+  - Assets/Scenes/Samples.unity
+  playerPath: C:/Users/student/Desktop/TeamB_1218_Build/TeamB_1018.exe

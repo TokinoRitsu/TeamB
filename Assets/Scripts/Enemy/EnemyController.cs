@@ -54,7 +54,6 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(chasingTarget);
         //Basic attack cooldown counting on any state
         if (onBaCD)
         {
@@ -168,7 +167,7 @@ public class EnemyController : MonoBehaviour
     public void Attack(float damage)
     {
         //player_pos.gameObject.GetComponent<PlayerController>().HP_Now -= damage;
-        animator.SetBool("attack", true);
+        //animator.SetBool("attack", true);
         onBaCD = true;
     }
 

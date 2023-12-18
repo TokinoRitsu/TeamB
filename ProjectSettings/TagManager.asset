@@ -7,6 +7,8 @@ TagManager:
   - GameManager
   - Enemy
   - Bonus
+  - Walkable
+  - Entrance
   layers:
   - Default
   - TransparentFX
