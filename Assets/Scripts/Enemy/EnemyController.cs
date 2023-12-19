@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 
     Animator animator; //Animator
     public Enemy e;
+    public float enemyHP_Now;
 
     public GameObject bonus;
     public bool chasingTarget; //Is the enemy chasing a target?
@@ -46,6 +47,7 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = transform.GetChild(1).GetComponent<Animator>(); //Get Animator componenet from hand
+        enemyHP_Now = e.enemyHP_Max;
         currentState = EnemyStates.Idle;
         player_pos = GameObject.FindGameObjectWithTag("Player").transform;
 
@@ -64,6 +66,12 @@ public class EnemyController : MonoBehaviour
                 cd_counter = 0; //Reset the counter
                 onBaCD = false;
             }
+        }
+
+        if (enemyHP_Now <= 0)
+        {
+            Debug.Log("Dead");
+            setCurrentEnemyState(EnemyStates.Dead);
         }
 
         switch (currentState)
@@ -154,6 +162,7 @@ public class EnemyController : MonoBehaviour
 
                 break;
             case EnemyStates.Dead:
+                Destroy(gameObject);
                 break;
         }
     }

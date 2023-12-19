@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
 
     private Vector2 moveInput;
     private float playerSpeed;
+    public float playerAtk;
 
     private bool isAttacking;
     private float attackCooldown;
@@ -26,7 +27,9 @@ public class PlayerController : MonoBehaviour
     private float dashCooldown;
     private float dashTimer;
 
-    Animator player_animator;
+    private Animator player_animator;
+
+    public GameObject playerAttackTrigger;
 
     private void Awake()
     {
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
 
         moveInput = Vector2.zero;
         playerSpeed = 5.0f;
+        playerAtk = 20f;
 
         isAttacking = false;
         attackCooldown = 0.5f;
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
                 {
                     isAttacking = true;
                     attackTimer = attackCooldown;
+                    Instantiate(playerAttackTrigger, transform);
                 }
             }
         }

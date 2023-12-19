@@ -8,7 +8,7 @@ public class Enemy : ScriptableObject
     public string enemyName;
     public int enemyTier;
     public int enemyCost;
-    public float enemyHP_Max, enemyHP_Now;
+    public float enemyHP_Max;
     public float speed, attack;
     public float attack_range, attack_delay;
     public bool hasHpReward;
@@ -52,7 +52,6 @@ public class Enemy : ScriptableObject
                 break;
 
         }
-        enemyHP_Now = enemyHP_Max;
 
         hasHpReward = _hasHpReward;
         isBoss = _isBoss;
@@ -62,7 +61,6 @@ public class Enemy : ScriptableObject
 
     #region getter
     public int GetTier() { return enemyTier; }
-    public float GetHp() { return enemyHP_Now; }
     public float GetSpeed() { return speed; }
     public float GetAttack() { return attack; }
     public float GetAttack_Range() { return attack_range; }
@@ -72,7 +70,6 @@ public class Enemy : ScriptableObject
 
     #region setter
     public void SetTier(int tier) { this.enemyTier = tier; }
-    public void SetHp(float hp) { this.enemyHP_Now = hp; }
     public void SetSpeed(float speed) { this.speed = speed; }
     public void SetAttack(float attack) { this.attack = attack; }
     public void SetAttack_Range(float attack_range) { this.attack_range = attack_range; }

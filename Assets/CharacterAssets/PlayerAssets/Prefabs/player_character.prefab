@@ -1152,6 +1152,8 @@ MonoBehaviour:
   HP_Max: 0
   HP_Now: 0
   dashable: 0
+  playerAttackTrigger: {fileID: 1633072823141816700, guid: a654bc1ba4fa550418c26d728e786503,
+    type: 3}
 --- !u!114 &5145276634598133794
 MonoBehaviour:
   m_ObjectHideFlags: 0
