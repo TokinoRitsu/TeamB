@@ -16,10 +16,8 @@ MonoBehaviour:
   enemyTier: 1
   enemyCost: 1
   enemyHP_Max: 200
-  enemyHP_Now: 200
   speed: 2
   attack: 5
   attack_range: 1
   attack_delay: 2
-  hasHpReward: 0
   isBoss: 0

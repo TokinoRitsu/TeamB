@@ -661,6 +661,7 @@ GameObject:
   - component: {fileID: 5615326437955576597}
   - component: {fileID: 5615326437955576619}
   - component: {fileID: 5615326437955576616}
+  - component: {fileID: 11481352}
   m_Layer: 0
   m_Name: usagi
   m_TagString: Enemy
@@ -715,11 +716,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7984846485c14bc43a528505ce4b9c5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tier: 3
-  attack_range: 12
-  attack_delay: 2
   player_pos: {fileID: 0}
   hit: 0
+  e: {fileID: 11400000, guid: eb6544238c344d64fbbb3af8637be353, type: 2}
+  enemyHP_Now: 0
   bonus: {fileID: 0}
   chasingTarget: 0
   busy: 0
@@ -748,6 +748,25 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!95 &11481352
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4696353314395037254}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ae7afe53452c8c0469233e0589301d97, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4847266549055821203
 GameObject:
   m_ObjectHideFlags: 0

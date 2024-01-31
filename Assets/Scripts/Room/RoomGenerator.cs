@@ -11,6 +11,7 @@ public class RoomGenerator : MonoBehaviour
 
     public GameObject PlayerPrefab;
     public GameObject[] RoomTilePrefabs;
+    public GameObject[] RoomItemPrefabs;
     public GameObject[] MobPrefabs;
 
     GameObject[] walkable;
@@ -57,7 +58,12 @@ ndOOO OOOO
         room.spawnPoints.Add(new List<Room.SpawnPoint>());
         room.spawnPoints[0].Add(new Room.SpawnPoint(7, -7, 0));
         room.spawnPoints[0].Add(new Room.SpawnPoint(3, -7, 0, true));
+        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(2, 0, -2, 0));
+        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(9, 0, -2, 0));
+        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(2, 0, -10, 0));
+        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(9, 0, -10, 0));
         GenerateRoom(room.roomShape);
+        GenerateItems(room.itemSpawnPoints);
         GenerateMobs(room.spawnPoints[0]);
         //NavMesh
         walkable = GameObject.FindGameObjectsWithTag("Walkable");
@@ -94,11 +100,21 @@ ndOOO OOOO
         }
     }
 
+    public void GenerateItems(List<Room.ItemSpawnPoint> _spawnPoints)
+    {
+        foreach (Room.ItemSpawnPoint i in _spawnPoints)
+        {
+            GameObject itemObject = Instantiate(RoomItemPrefabs[i.index]);
+            itemObject.transform.position = i.pos;
+        }
+    }
+
     public void GenerateMobs(List<Room.SpawnPoint> _spawnPoints)
     {
         foreach(Room.SpawnPoint i in _spawnPoints)
         {
             GameObject mobObject = Instantiate(MobPrefabs[i.index]);
+            mobObject.GetComponent<EnemyController>().hasHPReward = i.hasHeal;
             mobObject.transform.position = i.pos;
         }
     }

@@ -28,6 +28,7 @@ public class PlayerController : MonoBehaviour
     private float dashTimer;
 
     private Animator player_animator;
+    private bool perform_attack;
 
     public GameObject playerAttackTrigger;
 
@@ -40,7 +41,7 @@ public class PlayerController : MonoBehaviour
 
         moveInput = Vector2.zero;
         playerSpeed = 5.0f;
-        playerAtk = 20f;
+        playerAtk = 100f;
 
         isAttacking = false;
         attackCooldown = 0.5f;
@@ -49,7 +50,7 @@ public class PlayerController : MonoBehaviour
         isDashing = false;
         dashable = true;
         dashDistance = 2f;
-        dashSpeed = 50f;
+        dashSpeed = 10f;
         dashCooldown = 0.1f;
         dashTimer = 0f;
     }
@@ -70,12 +71,16 @@ public class PlayerController : MonoBehaviour
         }
         playerHPControl();
 
+        if (transform.position.y <= -3f || HP_Now <= 0)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameOver");
+        }
+
 
         // Temporary Functions
         if (Input.GetKeyDown(KeyCode.O)) HP_Now = HP_Max;
     }
 
-    
 
     public void OnMove(InputAction.CallbackContext ctx)
     {
@@ -85,12 +90,17 @@ public class PlayerController : MonoBehaviour
             {
                 if (ctx.performed)
                 {
+                    if (!perform_attack)
+                    {
+                        player_animator.SetBool("walk", true);
+                        //perform_attack = true;
+                    }
                     // player_animator.SetBool("walk", true);
                     moveInput = ctx.ReadValue<Vector2>().normalized;
                 }
                 else if (ctx.canceled)
                 {
-                    // player_animator.SetBool("walk", false);
+                    player_animator.SetBool("walk", false);
                     moveInput = Vector2.zero;
                 }
             }
@@ -105,8 +115,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (!isAttacking)
                 {
+                    player_animator.SetBool("attack", true);
                     isAttacking = true;
                     attackTimer = attackCooldown;
+                    HP_Now -= 5;
                     Instantiate(playerAttackTrigger, transform);
                 }
             }
@@ -152,6 +164,7 @@ public class PlayerController : MonoBehaviour
             else
             {
                 isAttacking = false;
+                player_animator.SetBool("attack", false);
                 attackTimer = 0f;
             }
         }

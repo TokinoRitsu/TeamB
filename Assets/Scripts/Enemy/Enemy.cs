@@ -11,9 +11,8 @@ public class Enemy : ScriptableObject
     public float enemyHP_Max;
     public float speed, attack;
     public float attack_range, attack_delay;
-    public bool hasHpReward;
     public bool isBoss;
-    public Enemy(int _tier, int _cost, bool _hasHpReward = false, bool _isBoss = false)
+    public Enemy(int _tier, int _cost, bool _isBoss = false)
     {
         enemyTier = _tier;
         enemyCost = _cost;
@@ -53,7 +52,6 @@ public class Enemy : ScriptableObject
 
         }
 
-        hasHpReward = _hasHpReward;
         isBoss = _isBoss;
     }
 

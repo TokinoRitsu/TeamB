@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -12,6 +13,14 @@ public class GameManager : MonoBehaviour
         End
     }
     public gameStatus status;
+    public GameObject HUDObject;
+    public GameObject DialogueObject;
+
+
+
+    private string tutorialText = "Hey there!\nYou are trapped here too, I see.\nWell, since we are at it, why don't we bail together?\nYou could use a guide around here.\nUse WASD to move. J to attack and K to perform a dash.\nI see you lost your arm!\nSwinging your sword will reduce your health, that's too bad...\nBut we are in luck! \nSee that enemy with the halo over their head?\nDefeat them to get your energy back!\nGood luck!";
+    private string[] tutorialTexts;
+    private int currentindex;
 
     private void Awake()
     {
@@ -20,13 +29,46 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(countdown(3));
+        tutorialTexts = tutorialText.Split('\n');
+        if (GameObject.Find("ValueHolder").GetComponent<ValueHolder>().isFirstTime)
+        {
+            HUDObject.SetActive(false);
+            DialogueObject.SetActive(true);
+            currentindex = 0;
+            UpdateDialogueText();
+        }
+        else
+        {
+            StartCoroutine(countdown(3));
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            if (currentindex == tutorialTexts.Length - 1)
+            {
+                DialogueObject.SetActive(false);
+                HUDObject.SetActive(true);
+                StartCoroutine(countdown(3));
+            }
+            else if (currentindex >= tutorialTexts.Length)
+            {
+
+            }
+            else
+            {
+                currentindex++;
+                UpdateDialogueText();
+            }
+        }
+    }
+
+    private void UpdateDialogueText()
+    {
+        DialogueObject.GetComponentInChildren<Text>().text = tutorialTexts[currentindex];
     }
 
     private IEnumerator countdown(float seconds)

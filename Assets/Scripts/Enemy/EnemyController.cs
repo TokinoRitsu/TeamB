@@ -15,6 +15,7 @@ public class EnemyController : MonoBehaviour
 
     Animator animator; //Animator
     public Enemy e;
+    public bool hasHPReward;
     public float enemyHP_Now;
 
     public GameObject bonus;
@@ -25,6 +26,8 @@ public class EnemyController : MonoBehaviour
     //Bomb
     public GameObject bomb_gameobject;
     public Transform bomb_startPos;
+
+    public GameObject halo_prefab;
 
     public enum EnemyStates
     {
@@ -47,11 +50,22 @@ public class EnemyController : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = transform.GetChild(1).GetComponent<Animator>(); //Get Animator componenet from hand
+        if (animator == null)
+        {
+            animator = GetComponent<Animator>();
+        }
         enemyHP_Now = e.enemyHP_Max;
         currentState = EnemyStates.Idle;
         player_pos = GameObject.FindGameObjectWithTag("Player").transform;
 
         chasingTarget = false;
+
+        if (hasHPReward)
+        {
+            GameObject haloObject = Instantiate(halo_prefab, transform);
+            Vector3 pos = haloObject.transform.position;
+            haloObject.transform.position = new Vector3(pos.x, pos.y + 1, pos.z);
+        }
     }
 
     void Update()
@@ -70,16 +84,30 @@ public class EnemyController : MonoBehaviour
 
         if (enemyHP_Now <= 0)
         {
-            Debug.Log("Dead");
+            //Debug.Log("Dead");
+            if (hasHPReward)
+            {
+                PlayerController controller = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+                controller.HP_Now = controller.HP_Max;
+            }
             setCurrentEnemyState(EnemyStates.Dead);
         }
 
+        // Debug.Log(currentState);
         switch (currentState)
         {
             case EnemyStates.Idle:
                 break;
             case EnemyStates.Chasing:
                 chasingTarget = true;
+                try
+                {
+                    animator.SetBool("walking", true);
+                }
+                catch
+                {
+                    Debug.Log("walking bool param not found");
+                }
                 agent.destination = player_pos.position; //Chase palyer
                 
 
@@ -116,7 +144,7 @@ public class EnemyController : MonoBehaviour
 
 
             case EnemyStates.Attack:
-
+                hit = false;
                 //If player still in range and not on basic attack cooldown, attack
                 if (Vector3.Distance(player_pos.position, transform.position) <= e.attack_range && !onBaCD)
                 {
@@ -177,6 +205,8 @@ public class EnemyController : MonoBehaviour
     {
         //player_pos.gameObject.GetComponent<PlayerController>().HP_Now -= damage;
         //animator.SetBool("attack", true);
+        animator.SetBool("attack", true);
+        animator.SetBool("walking", false);
         onBaCD = true;
     }
 
@@ -189,6 +219,9 @@ public class EnemyController : MonoBehaviour
     public void ThrowBomb(float damage)
     {
         transform.LookAt(player_pos);
+        animator.SetBool("attack", true);
+        animator.SetBool("walking", false);
+        Debug.Log("y u no throw the bom?");
         GameObject b = Instantiate(bomb_gameobject, bomb_startPos.position, Quaternion.identity);
         onBaCD = true;
     }

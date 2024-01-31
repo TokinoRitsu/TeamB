@@ -16,6 +16,18 @@ public class Room
         }
     }
 
+    public class ItemSpawnPoint
+    {
+        public Vector3 pos;
+        public int index;
+        public ItemSpawnPoint(int x, int y, int z, int _index)
+        {
+            pos = new Vector3(x, y, z);
+            index = _index;
+        }
+    }
+
     public string roomShape;
     public List<List<SpawnPoint>> spawnPoints = new List<List<SpawnPoint>>();
+    public List<ItemSpawnPoint> itemSpawnPoints = new List<ItemSpawnPoint>();
 }

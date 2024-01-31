@@ -226,6 +226,9 @@ GameObject:
   - component: {fileID: 4080147993299970983}
   - component: {fileID: 1682599896568310472}
   - component: {fileID: 1464940875592831572}
+  - component: {fileID: 6649201342019151285}
+  - component: {fileID: 4559146826984501457}
+  - component: {fileID: 5993267685096198650}
   m_Layer: 0
   m_Name: weapon
   m_TagString: Untagged
@@ -294,6 +297,47 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &6649201342019151285
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639274355921351219}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.08, y: 0.02, z: 0.05}
+  m_Center: {x: 0.013346154, y: -0.000000004656606, z: 0.0000016421544}
+--- !u!114 &4559146826984501457
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639274355921351219}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98b87b79ae3717444afd88b6ee912130, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!54 &5993267685096198650
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1639274355921351219}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1807074689114103160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1793,7 +1837,7 @@ GameObject:
   - component: {fileID: -545037919402103076}
   m_Layer: 0
   m_Name: skeleton
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1830,7 +1874,7 @@ Animator:
   m_GameObject: {fileID: 8034889210910812229}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 14668100beb07af46bfc4dee62fbb85d, type: 2}
+  m_Controller: {fileID: 9100000, guid: b1e74f99a46eba44799c56bac5440bfb, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1865,10 +1909,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.051312685
-  m_Height: 0.38446403
+  m_Radius: 0.16237967
+  m_Height: 0.39310408
   m_Direction: 1
-  m_Center: {x: -0.0016428828, y: 0.16197085, z: 0}
+  m_Center: {x: -0.0012101084, y: 0.17104852, z: 0}
 --- !u!114 &-5722695479250737847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1884,11 +1928,15 @@ MonoBehaviour:
   player_pos: {fileID: 0}
   hit: 0
   e: {fileID: 11400000, guid: 4cc60d6a4d3f7ce438a0f5309ff70fff, type: 2}
+  hasHPReward: 0
+  enemyHP_Now: 0
   bonus: {fileID: 0}
   chasingTarget: 0
   busy: 0
   bomb_gameobject: {fileID: 0}
   bomb_startPos: {fileID: 0}
+  halo_prefab: {fileID: 8431972033736931482, guid: 93c3ac22647a9cb468a2a40692750082,
+    type: 3}
 --- !u!195 &-545037919402103076
 NavMeshAgent:
   m_ObjectHideFlags: 0
