@@ -92,7 +92,7 @@
                 {
                     "name": "",
                     "id": "04791790-835a-41a4-b7c6-fbb5893ac6bf",
-                    "path": "<Keyboard>/j",
+                    "path": "<Keyboard>/enter",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -103,7 +103,7 @@
                 {
                     "name": "",
                     "id": "5d1d4b7f-f140-43f9-9423-8a657d1704af",
-                    "path": "<Keyboard>/k",
+                    "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

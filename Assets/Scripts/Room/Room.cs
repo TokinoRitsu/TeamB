@@ -28,6 +28,13 @@ public class Room
     }
 
     public string roomShape;
-    public List<List<SpawnPoint>> spawnPoints = new List<List<SpawnPoint>>();
+    public List<SpawnPoint> spawnPoints = new List<SpawnPoint>();
     public List<ItemSpawnPoint> itemSpawnPoints = new List<ItemSpawnPoint>();
+
+    public Room(string _roomShape, List<SpawnPoint> _spawnPoints, List<ItemSpawnPoint> _itemSpawnPoints)
+    {
+        roomShape = _roomShape;
+        spawnPoints = _spawnPoints;
+        itemSpawnPoints = _itemSpawnPoints;
+    }
 }

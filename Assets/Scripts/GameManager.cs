@@ -18,9 +18,11 @@ public class GameManager : MonoBehaviour
 
 
 
-    private string tutorialText = "Hey there!\nYou are trapped here too, I see.\nWell, since we are at it, why don't we bail together?\nYou could use a guide around here.\nUse WASD to move. J to attack and K to perform a dash.\nI see you lost your arm!\nSwinging your sword will reduce your health, that's too bad...\nBut we are in luck! \nSee that enemy with the halo over their head?\nDefeat them to get your energy back!\nGood luck!";
+    private string tutorialText = "Hey there!\nYou are trapped here too, I see.\nWell, since we are at it, why don't we bail together?\nYou could use a guide around here.\nUse WASD to move. Enter to attack and Space to perform a dash.\nI see you lost your arm!\nSwinging your sword will reduce your health, that's too bad...\nBut we are in luck! \nSee that enemy with the halo over their head?\nDefeat them to get your energy back!\nGood luck!";
     private string[] tutorialTexts;
     private int currentindex;
+
+    private bool fightEnd;
 
     private void Awake()
     {
@@ -32,6 +34,7 @@ public class GameManager : MonoBehaviour
         tutorialTexts = tutorialText.Split('\n');
         if (GameObject.Find("ValueHolder").GetComponent<ValueHolder>().isFirstTime)
         {
+            GameObject.Find("ValueHolder").GetComponent<ValueHolder>().isFirstTime = false;
             HUDObject.SetActive(false);
             DialogueObject.SetActive(true);
             currentindex = 0;
@@ -39,20 +42,28 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            StartCoroutine(countdown(3));
+            StartCoroutine(countdown(0));
+            HUDObject.SetActive(true);
+            DialogueObject.SetActive(false);
         }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (GameObject.FindGameObjectsWithTag("Enemy").Length == 0 && !fightEnd)
+        {
+            Destroy(GameObject.FindGameObjectWithTag("Exit").transform.GetChild(1).gameObject);
+            fightEnd = true;
+        }
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
             if (currentindex == tutorialTexts.Length - 1)
             {
                 DialogueObject.SetActive(false);
                 HUDObject.SetActive(true);
-                StartCoroutine(countdown(3));
+                StartCoroutine(countdown(0));
             }
             else if (currentindex >= tutorialTexts.Length)
             {

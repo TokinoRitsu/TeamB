@@ -170,6 +170,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.transform.parent.tag == "Exit")
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("GameLoading");
+            GameObject.Find("ValueHolder").GetComponent<ValueHolder>().currentRoom++;
+            if (GameObject.Find("ValueHolder").GetComponent<ValueHolder>().currentRoom == RoomData.roomData.Count)
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("GameClear");
+            }
+            else
+            {
+                UnityEngine.SceneManagement.SceneManager.LoadScene("Samples");
+            }
+        }
+    }
+
+
+
+
     private IEnumerator playerDashCooldown()
     {
         while (dashTimer > 0)

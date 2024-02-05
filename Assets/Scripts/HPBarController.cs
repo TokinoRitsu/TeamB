@@ -24,7 +24,7 @@ public class HPBarController : MonoBehaviour
         {
             updateHPBar();
 
-            if (Input.GetKey(KeyCode.P)) player.HP_Now--;
+            // if (Input.GetKey(KeyCode.P)) player.HP_Now--;
         }
         
     }

@@ -203,8 +203,7 @@ public class EnemyController : MonoBehaviour
     //Temp attack function, not by hit box and collider
     public void Attack(float damage)
     {
-        //player_pos.gameObject.GetComponent<PlayerController>().HP_Now -= damage;
-        //animator.SetBool("attack", true);
+        player_pos.gameObject.GetComponent<PlayerController>().HP_Now -= damage;
         animator.SetBool("attack", true);
         animator.SetBool("walking", false);
         onBaCD = true;

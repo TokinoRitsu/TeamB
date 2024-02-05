@@ -17,7 +17,7 @@ MonoBehaviour:
   enemyCost: 1
   enemyHP_Max: 200
   speed: 2
-  attack: 5
+  attack: 8
   attack_range: 1
   attack_delay: 2
   isBoss: 0

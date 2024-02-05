@@ -15,10 +15,9 @@ MonoBehaviour:
   enemyName: Bomber
   enemyTier: 3
   enemyCost: 2
-  enemyHP_Max: 400
+  enemyHP_Max: 300
   speed: 3
   attack: 10
   attack_range: 12
   attack_delay: 2
-  hasHpReward: 0
   isBoss: 0

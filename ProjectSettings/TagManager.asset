@@ -9,6 +9,7 @@ TagManager:
   - Bonus
   - Walkable
   - Entrance
+  - Exit
   layers:
   - Default
   - TransparentFX

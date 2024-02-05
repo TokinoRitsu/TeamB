@@ -7,7 +7,7 @@ using UnityEngine.AI;
 
 public class RoomGenerator : MonoBehaviour
 {
-    public Room room = new Room();
+    public Room room;
 
     public GameObject PlayerPrefab;
     public GameObject[] RoomTilePrefabs;
@@ -42,29 +42,10 @@ public class RoomGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        room.roomShape = 
-@"
- pjjjjjjj h
-pcOOO OOOO 
-lOOOO OOOOk
-lOOOO OOOOk
-lOOOO OOOOk
-XOOOO OOOOE
-lOOOO OOOOk
-lOOOO OOOOk
-lOOOO OOOOk
-ndOOO OOOO 
- niiiiiii g";
-        room.spawnPoints.Add(new List<Room.SpawnPoint>());
-        room.spawnPoints[0].Add(new Room.SpawnPoint(7, -7, 0));
-        room.spawnPoints[0].Add(new Room.SpawnPoint(3, -7, 0, true));
-        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(2, 0, -2, 0));
-        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(9, 0, -2, 0));
-        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(2, 0, -10, 0));
-        room.itemSpawnPoints.Add(new Room.ItemSpawnPoint(9, 0, -10, 0));
+        room = RoomData.roomData[GameObject.Find("ValueHolder").GetComponent<ValueHolder>().currentRoom];
         GenerateRoom(room.roomShape);
         GenerateItems(room.itemSpawnPoints);
-        GenerateMobs(room.spawnPoints[0]);
+        GenerateMobs(room.spawnPoints);
         //NavMesh
         walkable = GameObject.FindGameObjectsWithTag("Walkable");
         for (int i = 0; i < walkable.Length; i++)
